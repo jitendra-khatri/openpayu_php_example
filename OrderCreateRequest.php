@@ -44,18 +44,19 @@ $shippingCost = array(	'CountryCode' => 'PL',
 // http://www.payu.com/pl/openpayu/OrderDomainRequest.html#Link8A
 $item = array(	'Quantity' => 1,
 				'Product' => array (
-					'Name' => 'name of test product',
+					'Name' => 'random test product',
 					'UnitPrice' => array (
-						'Gross' => 10000, 'Net' => 7800, 'Tax' => 22, 'TaxRate' => '22', 'CurrencyCode' => 'PLN'
+						'Gross' => 12200, 'Net' => 10000, 'Tax' => 22, 'TaxRate' => '22', 'CurrencyCode' => 'PLN'
 					)
 				)
 			);
 
 // http://www.payu.com/pl/openpayu/OrderDomainRequest.html#Link46
-$shoppingCart = array( 	'GrandTotal' => 10000,
+$shoppingCart = array( 	'GrandTotal' => 24400,
 						'CurrencyCode' => 'PLN',
 						'ShoppingCartItems' => array (
-							'ShoppingCartItem' => $item
+							array ('ShoppingCartItem' => $item),
+							array ('ShoppingCartItem' => $item)							
 						)
 					);
 
