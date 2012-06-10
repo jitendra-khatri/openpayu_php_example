@@ -1,15 +1,23 @@
 <?php
 
-/**
- *	OpenPayU Standard Library
- *	This code is depracated. Will be removed in the future.	
- *	
- *	@package	OpenPayU
- *	@copyright	Copyright (c) 2011-2012, PayU
- *	@license	http://opensource.org/licenses/LGPL-3.0  Open Software License (LGPL 3.0)
- */
+/*
+	ver. 0.1.8
+	OpenPayU Standard Library
+	
+	This code is obsolete code. Will be removed in the future.
+	
+	@copyright  Copyright (c) 2011-2012 PayU
+	@license    http://opensource.org/licenses/LGPL-3.0  Open Software License (LGPL 3.0)
+	http://www.payu.com
+	http://openpayu.com
+	http://twitter.com/openpayu
 
-
+	
+	
+	CHANGE_LOG:
+	2012-02-23 ver. 0.1.8
+		- file created
+*/
 
 class OpenPayUNetwork
 {

@@ -1,12 +1,24 @@
 <?php
 
-/**
- *	OpenPayU Standard Library
- *
- *	@package	OpenPayU
- *	@copyright	Copyright (c) 2011-2012, PayU
- *	@license	http://opensource.org/licenses/LGPL-3.0  Open Software License (LGPL 3.0)
- */
+/*
+	ver. 0.1.7
+	OpenPayU Standard Library
+	
+	@copyright  Copyright (c) 2011-2012 PayU
+	@license    http://opensource.org/licenses/LGPL-3.0  Open Software License (LGPL 3.0)
+	http://www.payu.com
+	http://openpayu.com
+	http://twitter.com/openpayu
+
+	
+	
+	CHANGE_LOG:
+	2012-02-14 ver. 0.1.7
+		- file created
+		- all access to attributes of *Result classt is by public accessor
+		- replaced $debug = 1 notation to $debug = TRUE
+	
+*/	
 
 class OpenPayU_Order extends OpenPayU {
 	
@@ -91,7 +103,7 @@ class OpenPayU_Order extends OpenPayU {
 			OpenPayU::addOutputConsole('OrderRetrieveResponse message', htmlentities($response));
 		}
 
-		$status = OpenPayU::verifyOrderCreateResponse($response);
+		$status = OpenPayU::verifyOrderRetrieveResponseStatus($response);
 		if ($debug) {
 			OpenPayU::addOutputConsole('OrderRetrieveResponse status', serialize($status));
 		}
@@ -100,7 +112,7 @@ class OpenPayU_Order extends OpenPayU {
 		$result->setStatus($status);
 		$result->setError($status['StatusCode']);
 		$result->setSuccess($status['StatusCode'] == 'OPENPAYU_SUCCESS' ? TRUE : FALSE);
-		$result->setRequest($order);
+		$result->setRequest($req);
 		$result->setResponse($response);
 
 		try {

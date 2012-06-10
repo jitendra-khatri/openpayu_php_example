@@ -1,12 +1,22 @@
 <?php
 
-/**
- *	OpenPayU Standard Library
- *
- *	@package	OpenPayU
- *	@copyright	Copyright (c) 2011-2012, PayU
- *	@license	http://opensource.org/licenses/LGPL-3.0  Open Software License (LGPL 3.0)
- */
+/*
+	ver. 0.1.7
+	OpenPayU Standard Library
+	
+	@copyright  Copyright (c) 2011-2012 PayU
+	@license    http://opensource.org/licenses/LGPL-3.0  Open Software License (LGPL 3.0)
+	http://www.payu.com
+	http://openpayu.com
+	http://twitter.com/openpayu
+
+	
+	
+	CHANGE_LOG:
+	2012-02-14 ver. 0.1.7
+		- file created
+		
+*/
 
 class OpenPayU_ResultOAuth {
 	private $url = '';

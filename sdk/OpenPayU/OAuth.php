@@ -1,12 +1,16 @@
 <?php
 
-/**
- *	OpenPayU Standard Library
- *
- *	@package	OpenPayU
- *	@copyright	Copyright (c) 2011-2012, PayU
- *	@license	http://opensource.org/licenses/LGPL-3.0  Open Software License (LGPL 3.0)
- */
+/*
+	ver. 0.1.7
+	OpenPayU Standard Library
+	
+	@copyright  Copyright (c) 2011-2012 PayU
+	@license    http://opensource.org/licenses/LGPL-3.0  Open Software License (LGPL 3.0)
+	http://www.payu.com
+	http://openpayu.com
+	http://twitter.com/openpayu
+	
+*/
 
 class OpenPayU_OAuth extends OpenPayUOAuth
 {
@@ -35,9 +39,13 @@ class OpenPayU_OAuth extends OpenPayUOAuth
 			OpenPayU::setOpenPayuEndPoint($url);
 			$json = OpenPayuOAuth::getAccessTokenByCode($code, OpenPayU_Configuration::getClientId(), OpenPayU_Configuration::getClientSecret(), $returnUri);
 
-			$result->setAccessToken($json->{'access_token'});
-			$result->setPayuUserEmail($json->{'payu_user_email'});
-			$result->setPayuUserId($json->{'payu_user_id'});
+			$result->setAccessToken($json->{'access_token'});			
+			if(isSet($json->{'payu_user_email'})) {
+            	$result->setPayuUserEmail($json->{'payu_user_email'});
+            } 
+			if(isSet($json->{'payu_user_id'})) {
+            	$result->setPayuUserId($json->{'payu_user_id'});
+            }					
 			$result->setExpiresIn($json->{'expires_in'});
 			$result->setRefreshToken($json->{'refresh_token'});
 			$result->setSuccess(1);
@@ -72,9 +80,13 @@ class OpenPayU_OAuth extends OpenPayUOAuth
 			$json = OpenPayUOAuth::getAccessTokenByClientCredentials(OpenPayU_Configuration::getClientId(), OpenPayU_Configuration::getClientSecret());
 
 			$result->setAccessToken($json->{'access_token'});
-			$result->setPayuUserEmail($json->{'payu_user_email'});
-			$result->setPayuUserId($json->{'payu_user_id'});
-			$result->setExpiresIn($json->{'expires_in'});
+			if(isSet($json->{'payu_user_email'})) {
+            	$result->setPayuUserEmail($json->{'payu_user_email'});
+            } 
+			if(isSet($json->{'payu_user_id'})) {
+            	$result->setPayuUserId($json->{'payu_user_id'});
+            }		
+            $result->setExpiresIn($json->{'expires_in'});
 			$result->setRefreshToken($json->{'refresh_token'});
 			$result->setSuccess(1);
 		} catch (Exception $ex) {
