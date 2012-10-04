@@ -1,12 +1,12 @@
 <?php
 
 /**
- *	OrderCreateRequest message processing. This is order initialization phase. 
+ *	OrderCreateRequest message processing. This is order initialization phase.
  *
  *	@copyright  Copyright (c) 2011-2012, PayU
- *	@license    http://opensource.org/licenses/GPL-3.0  Open Software License (GPL 3.0)		
+ *	@license    http://opensource.org/licenses/GPL-3.0  Open Software License (GPL 3.0)
  */
-	
+
 session_start();
 
 include_once("sdk/openpayu.php");
@@ -23,16 +23,16 @@ $_SESSION['sessionId'] = md5(rand() . rand() . rand() . rand());
 // shippingCost structure
 $shippingCost = array(
     'CountryCode' => 'PL',
-	'ShipToOtherCountry' => 'true',
-	'ShippingCostList' => array(
+    'ShipToOtherCountry' => 'true',
+    'ShippingCostList' => array(
         'ShippingCost' => array(
             'Type' => 'courier_0',
             'CountryCode' => 'PL',
             'Price' => array(
-                'Gross' => '1220', 'Net' => '1000', 'Tax' => '22', 'TaxRate' => '22', 'CurrencyCode' => 'PLN'
+                'Gross' => '1220', 'Net' => '0', 'Tax' => '0', 'TaxRate' => '0', 'CurrencyCode' => 'PLN'
             )
         )
-	)
+    )
 );
 
 // initialization of order is done with OrderCreateRequest message sent.
@@ -45,7 +45,7 @@ $item = array(
     'Product' => array (
         'Name' => 'random test product',
         'UnitPrice' => array (
-            'Gross' => 12300, 'Net' => 10000, 'Tax' => 23, 'TaxRate' => '23', 'CurrencyCode' => 'PLN'
+            'Gross' => 12300, 'Net' => 0, 'Tax' => 0, 'TaxRate' => '0', 'CurrencyCode' => 'PLN'
         )
     )
 );
@@ -53,11 +53,11 @@ $item = array(
 // shoppingCart structure
 $shoppingCart = array(
     'GrandTotal' => 24600,
-	'CurrencyCode' => 'PLN',
-	'ShoppingCartItems' => array (
-	    array ('ShoppingCartItem' => $item),
-		array ('ShoppingCartItem' => $item)
-	)
+    'CurrencyCode' => 'PLN',
+    'ShoppingCartItems' => array (
+        array ('ShoppingCartItem' => $item),
+        array ('ShoppingCartItem' => $item)
+    )
 );
 
 // Order structure
@@ -91,18 +91,36 @@ $OCReq = array (
 $result = OpenPayU_Order::create($OCReq);
 
 if ($result->getSuccess()) {
-	echo OpenPayU_Order::printOutputConsole();
-?>
+    echo OpenPayU_Order::printOutputConsole();
 
-	<form method="GET" action="<?php echo OpenPayU_Configuration::getAuthUrl(); ?>">
-		<input type="hidden" name="redirect_uri" value="<?php echo $myUrl . "/BeforeSummaryPage.php";?>">
-		<input type="hidden" name="response_type" value="code">
-		<input type="hidden" name="client_id" value="<?php echo OpenPayU_Configuration::getClientId(); ?>">
-		<input type="submit" value="Next step (user authorization) >">
-	</form>
+    $result = OpenPayU_OAuth::accessTokenByClientCredentials();
+    ?>
+<br><br>
+<form method="GET" action="<?php echo OpenPayU_Configuration::getAuthUrl(); ?>">
+    <fieldset>
+        <legend>Process with user authentication</legend>
+        <input type="hidden" name="redirect_uri" value="<?php echo $myUrl . "/BeforeSummaryPage.php";?>">
+        <input type="hidden" name="response_type" value="code">
+        <input type="hidden" name="client_id" value="<?php echo OpenPayU_Configuration::getClientId(); ?>">
+        <input type="submit" value="Next step (user authorization) >">
+    </fieldset>
+</form>
+
+<form method="GET" action="<?php echo OpenPayu_Configuration::getSummaryUrl();?>">
+    <fieldset>
+        <legend>Process without user authentication, redirect to summary</legend>
+        <input type="hidden" name="sessionId" value="<?php echo $_SESSION['sessionId'];?>">
+        <input type="hidden" name="oauth_token" value="<?php echo $result->getAccessToken();?>">
+        <label for="showLoginDialogSelect">Show login dialog</label><select name="showLoginDialog" id="showLoginDialogSelect">
+            <option value="False">No</option>
+            <option value="True">Yes</option>
+        </select>
+        <input type="submit" value="Next step (summary page) >">
+    </fieldset>
+</form>
 
 <?php
 } else {
-	echo OpenPayU_Order::printOutputConsole();
-	echo "<br/><br/><br/>ERROR: " . $result->getError() . "<br/>";	
+    echo OpenPayU_Order::printOutputConsole();
+    echo "<br/><br/><br/>ERROR: " . $result->getError() . "<br/>";
 }
