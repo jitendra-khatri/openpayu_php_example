@@ -10,7 +10,7 @@
 include_once("sdk/openpayu.php");
 include_once("config.php");
 
-$xml = stripslashes($_REQUEST['DOCUMENT']);
+$xml = stripslashes($_POST['DOCUMENT']);
 
 $result = OpenPayU_Order::consumeMessage($xml);
 

@@ -18,7 +18,7 @@ function write_to_file($file, $data) {
 try {	
 	// Processing notification received from payu service.
 	// Variable $notification contains array with OrderNotificationRequest message.
-	$result = OpenPayU_Order::consumeMessage($_REQUEST['DOCUMENT']);
+	$result = OpenPayU_Order::consumeMessage($_POST['DOCUMENT']);
 	if ($result->getMessage() == 'OrderNotifyRequest') {
 		// Second step, request details of order data.
 		// Variable $response contain array with OrderRetrieveResponse message.
