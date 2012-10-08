@@ -28,6 +28,4 @@ try {
 } catch (Exception $e) {
 	write_to_file("debug.txt", $e->getMessage());
 	write_to_file("debug.txt", OpenPayU_Order::printOutputConsole());
-}	
-	
-?>
+}
