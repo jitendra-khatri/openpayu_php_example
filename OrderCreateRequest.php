@@ -88,10 +88,19 @@ $OCReq = array (
 
 # if logged customer in eshop
 $customer = array(
-    'Email' => 'example@address.mail',
-    'FirstName' => 'John',
-    'LastName' => 'Exemplary',
-    'Phone' => '01234567'
+    'Email' => 'example@mail.address.com',
+    'FirstName' => 'Jan',
+    'LastName' => 'Kowalski',
+    'Phone' => '01234567',
+    'Shipping' => array(
+        'Street' => 'Marcelinska',
+        'HouseNumber' => '90',
+        'PostalCode' => '69-456',
+        'City' => 'Poznan',
+        'CountryCode' => 'PL',
+        'AddressType' => 'SHIPPING',
+        'RecipientName' => 'PayU'
+    )
 );
 
 
