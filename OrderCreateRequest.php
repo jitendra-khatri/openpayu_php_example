@@ -14,7 +14,7 @@ include_once("config.php");
 
 // openpayu service configuration
 // some preprocessing
-$directory = ltrim(dirname($_SERVER['SCRIPT_NAME']), '/');
+$directory = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/');
 $myUrl = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? 'https://' : 'http://') . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] .$directory;
 
 $_SESSION['sessionId'] = md5(rand() . rand() . rand() . rand());
