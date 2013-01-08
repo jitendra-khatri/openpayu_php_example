@@ -24,11 +24,22 @@ $shippingCost = array(
     'CountryCode' => 'PL',
     'ShipToOtherCountry' => 'true',
     'ShippingCostList' => array(
-        'ShippingCost' => array(
-            'Type' => 'courier_0',
-            'CountryCode' => 'PL',
-            'Price' => array(
-                'Gross' => '1220', 'Net' => '0', 'Tax' => '0', 'TaxRate' => '0', 'CurrencyCode' => 'PLN'
+        array(
+            'ShippingCost' => array(
+                'Type' => 'courier_0',
+                'CountryCode' => 'PL',
+                'Price' => array(
+                    'Gross' => '1220', 'Net' => '0', 'Tax' => '0', 'TaxRate' => '0', 'CurrencyCode' => 'PLN'
+                )
+            )
+        ),
+        array(
+            'ShippingCost' => array(
+                'Type' => 'courier_1',
+                'CountryCode' => 'PL',
+                'Price' => array(
+                    'Gross' => '861', 'Net' => '700', 'Tax' => '161', 'TaxRate' => '23', 'CurrencyCode' => 'PLN'
+                )
             )
         )
     )
@@ -91,14 +102,29 @@ $customer = array(
     'FirstName' => 'Jan',
     'LastName' => 'Kowalski',
     'Phone' => '01234567',
+    'Language' => 'pl_PL',
+    /* Shipping address*/
     'Shipping' => array(
         'Street' => 'Marcelinska',
         'HouseNumber' => '90',
+        'ApartmentNumber' => '',
         'PostalCode' => '69-456',
         'City' => 'Poznan',
         'CountryCode' => 'PL',
         'AddressType' => 'SHIPPING',
-        'RecipientName' => 'PayU'
+        'RecipientName' => 'Jan Kowalski'
+    ),
+    /* Invoice billing data */
+    'Invoice' => array(
+        'Street' => 'Marcelinska',
+        'HouseNumber' => '90',
+        'ApartmentNumber' => '',
+        'PostalCode' => '60-324',
+        'City' => 'Poznan',
+        'CountryCode' => 'PL',
+        'AddressType' => 'BILLING',
+        'RecipientName' => 'PayU SA',
+        'TIN' => '779-23-08-495'
     )
 );
 
